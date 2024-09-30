@@ -1,5 +1,5 @@
 
-# Todo App in Node.js and ejs
+# Todo App in Node.js and EJS
 
 ![Logo](https://angoshtarbaz.storage.c2.liara.space/images/todo-app.png)
 ## Run Locally
