@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title><%= pageTitle%></title>
+  </head>
+  <body>
+    <h1>Todo App</h1>
+    <form method="POST" action="/admin/add-todo">
+      <input type="text" name="title" />
+      <input type="submit" class="btn btn-primary"/>
+    </form>
+    <div class="tasks">
+      <div class="col">
+        <h2 class="">to do</h2>
+        <% if(data.length > 0) { %> <% for(let todo of data){ %>
+        <div class="bg-warning">
+          <p><%= todo.title %></p>
+          <a class="btn btn-danger" href="/admin/delete-todo?id=<%= todo.id %>">delete</a>
+          <a class="btn btn-success" href="/admin/check-todo?id=<%= todo.id %>">done</a>
+        </div>
+        <% } %> <% } %>
+      </div>
+      <div class="col">
+        <h2>done</h2>
+        <% if(done.length > 0) { %> <% for(let todo of done){ %>
+        <div class="bg-success">
+          <p><%= todo.title %></p>
+          <a class="btn btn-danger" href="/admin/delete-todo?id=<%= todo.id %>">delete</a>
+        </div>
+        <% } %> <% } %>
+      </div>
+    </div>
+    <script src="bootstrapJs/bootstrap.min.js"/>
+  </body>
+</html>
