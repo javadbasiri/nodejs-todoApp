@@ -1,6 +1,6 @@
 const Todo = require("../model/todo");
 
-exports.addTodo = (req, res, next) => {
+exports.addTodo = async (req, res, next) => {
   const {
     body: { title },
   } = req;
@@ -9,30 +9,26 @@ exports.addTodo = (req, res, next) => {
     res.status(400).send("title is required!");
   }
 
-  const todo = new Todo({ title });
-
-  todo.save((err) => {
-    console.log(err);
-  });
+  await Todo.create({ text: title }).catch((e) => console.log("error", e));
 
   res.redirect("/");
 };
 
-exports.deleteTodo = (req, res) => {
+exports.deleteTodo = async (req, res) => {
   const { query } = req;
 
-  if (query.id) {
-    Todo.deleteTodo(query.id);
-  }
+  await Todo.findByIdAndDelete(query.id);
 
   res.redirect("/");
 };
 
-exports.checkTodo = (req, res) => {
+exports.checkTodo = async (req, res) => {
   const { query } = req;
 
   if (query.id) {
-    Todo.checkTodo(query.id);
+    const todo = await Todo.findById(query.id);
+    todo.completed = true;
+    todo.save();
   }
 
   res.redirect("/");

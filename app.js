@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 const express = require("express");
 
+require("./database");
 const { static } = require("./static");
 
 const addTodo = require("./routes/admin");
